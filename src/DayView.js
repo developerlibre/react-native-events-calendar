@@ -55,16 +55,20 @@ export default class DayView extends React.PureComponent {
   }
 
   _renderRedLine() {
-      const offset = CALENDER_HEIGHT / 24
-      const { format24h } = this.props
-      const { width, styles } = this.props
-      const timeNowHour = moment().hour()
-      const timeNowMin = moment().minutes()
+    const offset = CALENDER_HEIGHT / 24
+    const { format24h, date } = this.props
+    const { width, styles } = this.props
+    const timeNowHour = moment().hour()
+    const timeNowMin = moment().minutes()
+
+    if (date.isSame(moment(), 'day')) {
       return (
-          <View key={`timeNow`}
-            style={[styles.lineNow, { top: offset * timeNowHour + offset * timeNowMin / 60, width: width - 20 }]}
-          />
-    )
+        <View key={`timeNow`}
+          style={[styles.lineNow, { top: offset * timeNowHour + offset * timeNowMin / 60, width: width - 20 }]}
+        />
+      )
+    }
+    return null;
   }
 
   _renderLines () {
